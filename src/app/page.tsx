@@ -579,7 +579,7 @@ const HomePage = () => {
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
-                  <div>
+                  <div className="md:col-span-2">
                       <label className="block text-sm font-medium text-gray-900 mb-2">Name *</label>
                     <Input
                       required
