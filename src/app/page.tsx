@@ -201,12 +201,12 @@ const HomePage = () => {
         >
           <div className="w-full max-w-full sm:max-w-7xl mx-auto">
             
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-normal text-white mb-6 md:mb-10">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-normal text-white mb-6 md:mb-10 ml-0 md:ml-8">
               Affordable Mobile Homes
               <span className="block text-white/90">& Land Solutions</span>
           </h1>
             
-            <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 md:mb-12 leading-relaxed font-normal">
+            <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 md:mb-12 leading-relaxed font-normal ml-0 md:ml-8">
               Buy, Install, and Secure Your Future Home
             </p>
 
@@ -473,7 +473,17 @@ const HomePage = () => {
                     info@usaffordablehousing.com
                   </a>
                 </div>
-          </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                  <Calendar className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Schedule a Visit</h3>
+                  <p className="text-white/80 mb-2">Tour our model homes and communities</p>
+                </div>
+              </div>
 
             </div>
 

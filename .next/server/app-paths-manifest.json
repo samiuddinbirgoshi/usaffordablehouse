@@ -1,8 +1,5 @@
 {
-  "/about/page": "app/about/page.js",
   "/contact/page": "app/contact/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/gallery/page": "app/gallery/page.js",
-  "/homes/page": "app/homes/page.js",
   "/page": "app/page.js"
 }
