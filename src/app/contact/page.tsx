@@ -115,22 +115,6 @@ const ContactPage = () => {
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Interest *
-                      </label>
-                      <Select onValueChange={(value) => handleInputChange('interest', value)}>
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="What are you interested in?" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="buy-home">Buy Home</SelectItem>
-                          <SelectItem value="buy-land">Buy Land</SelectItem>
-                          <SelectItem value="invest">Invest</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -178,47 +162,6 @@ const ContactPage = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-primary mt-1" />
-                    <div>
-                      <div className="font-semibold text-gray-900">Central Florida</div>
-                      <div className="text-sm text-gray-600">Serving the entire region</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-primary mt-1" />
-                    <div>
-                      <div className="font-semibold text-gray-900">Service Area</div>
-                      <div className="text-sm text-gray-600">Central Florida & Surrounding Areas</div>
-                      <div className="mt-2 w-full h-32 bg-gray-200 rounded-lg flex items-center justify-center">
-                        <span className="text-gray-500 text-sm">Map Coming Soon</span>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Quick Response Card */}
-              <Card className="bg-gray-50">
-                <CardHeader>
-                  <CardTitle className="text-lg font-heading text-primary">Quick Response Guarantee</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-700 mb-4">
-                    We understand that finding affordable housing is urgent. That's why we guarantee
-                    to respond to all inquiries within 24 hours, typically much sooner.
-                  </p>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>Emails answered within 4 hours</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>Site visits scheduled quickly</span>
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
 

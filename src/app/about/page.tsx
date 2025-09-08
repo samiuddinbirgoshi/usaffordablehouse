@@ -119,7 +119,7 @@ const AboutPage = () => {
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             Let our experienced team help you navigate the path to homeownership with confidence and ease.
           </p>
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600 text-white">
             <Link href="/contact">Contact Us to Learn More</Link>
           </Button>
         </div>

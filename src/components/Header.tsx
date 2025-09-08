@@ -67,7 +67,7 @@ const Header = ({ currentPage = '' }: HeaderProps) => {
 
           <div className="hidden md:block">
             <Button asChild>
-              <Link href="/contact">Get Started</Link>
+              <Link href="/contact">Get a Quote</Link>
             </Button>
           </div>
 
@@ -134,7 +134,7 @@ const Header = ({ currentPage = '' }: HeaderProps) => {
               <div className="pt-2">
                 <Button asChild className="w-full">
                   <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
-                    Get Started
+                    Get a Quote
                   </Link>
                 </Button>
               </div>

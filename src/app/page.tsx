@@ -25,14 +25,12 @@ import {
 } from 'lucide-react'
 
 const HomePage = () => {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    interest: '',
     message: ''
   })
 
@@ -42,7 +40,6 @@ const HomePage = () => {
   const [aboutRef, aboutVisible] = useSmoothLoading(0.1)
   const [featuresRef, featuresVisible] = useSmoothLoading(0.1)
   const [galleryRef, galleryVisible] = useSmoothLoading(0.1)
-  const [testimonialsRef, testimonialsVisible] = useSmoothLoading(0.1)
   const [servicesRef, servicesVisible] = useSmoothLoading(0.1)
   const [contactRef, contactVisible] = useSmoothLoading(0.1)
 
@@ -84,26 +81,6 @@ const HomePage = () => {
     }
   ]
 
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      location: "Orlando, FL",
-      text: "U.S. Affordable Housing made our dream of homeownership possible. The team was professional, responsive, and delivered exactly what they promised. Our new home is beautiful and we couldn't be happier!",
-      rating: 5
-    },
-    {
-      name: "Michael Rodriguez",
-      location: "Tampa, FL", 
-      text: "From land acquisition to final installation, they handled everything seamlessly. The quality of our home exceeded expectations and the process was stress-free. Highly recommend!",
-      rating: 5
-    },
-    {
-      name: "Jennifer Chen",
-      location: "Miami, FL",
-      text: "As a first-time homebuyer, I was nervous about the process. The team at U.S. Affordable Housing guided me through every step and made it so easy. Now I have my dream home!",
-      rating: 5
-    }
-  ]
 
   const services = [
     {
@@ -173,12 +150,6 @@ const HomePage = () => {
   ]
 
 
-  useEffect(() => {
-    const testimonialInterval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-    return () => clearInterval(testimonialInterval)
-  }, [testimonials.length])
 
   useEffect(() => {
     const slideInterval = setInterval(() => {
@@ -228,7 +199,7 @@ const HomePage = () => {
           ref={heroRef}
           className={`relative z-10 w-full px-4 sm:px-6 lg:px-8 text-left fade-in ${heroVisible ? 'visible' : ''}`}
         >
-          <div className="max-w-4xl">
+          <div className="max-w-4xl ml-0 md:ml-8">
             
             <h1 className="text-5xl md:text-6xl font-heading font-normal text-white mb-10">
               Affordable Mobile Homes
@@ -383,62 +354,11 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section ref={testimonialsRef} className="py-24 bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`text-center mb-12 fade-in ${testimonialsVisible ? 'visible' : ''}`}>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              What Our Customers Say
-            </h2>
-            <p className="text-lg text-white/90 max-w-3xl mx-auto">
-              Don't just take our word for it - hear from families who have made their dream of homeownership a reality.
-            </p>
-          </div>
-
-          <div className={`max-w-4xl mx-auto fade-in ${testimonialsVisible ? 'visible' : ''}`}>
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 p-6">
-              <CardContent className="text-center">
-                <div className="flex justify-center mb-4">
-                  {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <blockquote className="text-lg md:text-xl text-white mb-6 leading-relaxed">
-                  "{testimonials[currentTestimonial].text}"
-                </blockquote>
-                <div className="text-white/90">
-                  <div className="font-semibold text-base">
-                    {testimonials[currentTestimonial].name}
-                  </div>
-                  <div className="text-white/70 text-sm">
-                    {testimonials[currentTestimonial].location}
-                </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <div className="flex justify-center mt-8 space-x-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    index === currentTestimonial ? 'bg-white' : 'bg-white/50'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Services Section */}
       <section ref={servicesRef} className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`text-center mb-12 fade-in ${servicesVisible ? 'visible' : ''}`}>
-            <div className="inline-block bg-primary/10 text-primary px-6 py-2 rounded-full text-sm font-semibold mb-6">
-              What We Offer
-                </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-8">
               Complete Housing
               <span className="block text-primary">Solutions</span>
@@ -531,7 +451,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`text-center mb-12 fade-in ${contactVisible ? 'visible' : ''}`}>
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              Ready to Start Your
+              Ready to Get a Quote for Your
               <span className="block text-white/90">Dream Home Journey?</span>
             </h2>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
@@ -555,18 +475,6 @@ const HomePage = () => {
                 </div>
           </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                  <Calendar className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Schedule a Visit</h3>
-                  <p className="text-white/80 mb-2">Tour our model homes and communities</p>
-                  <Button asChild variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
-                    <Link href="/contact">Schedule Now</Link>
-            </Button>
-          </div>
-        </div>
             </div>
 
             <Card className={`bg-white shadow-xl fade-in ${contactVisible ? 'visible' : ''}`}>
@@ -603,20 +511,6 @@ const HomePage = () => {
                   />
                 </div>
 
-                <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">Interest *</label>
-                    <Select onValueChange={(value: string) => handleInputChange('interest', value)}>
-                      <SelectTrigger className="bg-gray-50 border-gray-300 text-gray-900">
-                        <SelectValue placeholder="What are you interested in?" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="buy-home">Buy Home</SelectItem>
-                      <SelectItem value="buy-land">Buy Land</SelectItem>
-                      <SelectItem value="invest">Invest</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
 
                 <div>
                     <label className="block text-sm font-medium text-gray-900 mb-2">Message</label>

@@ -253,7 +253,7 @@ const GalleryPage = () => {
             Let us help you create your own affordable housing success story. From land acquisition
             to final installation, we're here to guide you every step of the way.
           </p>
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600 text-white">
             <Link href="/contact">Interested? Get in Touch</Link>
           </Button>
         </div>

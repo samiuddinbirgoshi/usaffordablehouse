@@ -169,21 +169,17 @@ const HomesPage = () => {
           </div>
 
           {/* CTA Section */}
-          <div className={`text-center mt-16 fade-in ${homesVisible ? 'visible' : ''}`}>
+          <div className={`text-center mt-12 fade-in ${homesVisible ? 'visible' : ''}`}>
             <Card className="max-w-2xl mx-auto bg-gray-50 rounded-none">
-              <CardHeader>
+              <CardHeader className="pb-4">
                 <CardTitle className="text-2xl font-heading text-primary">
-                  Ready to Find Your Perfect Home?
+                  Ready to Find Your Affordable Home?
                 </CardTitle>
-                <CardDescription>
-                  Contact us to view all models, get pricing, and schedule a tour.
-                  No prices shown - we provide personalized quotes based on your needs.
-                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-center">
-                  <Button asChild size="lg">
-                    <Link href="/contact">Reach Out to View All Models and Find Your Perfect Home</Link>
+                  <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600 text-white">
+                    <Link href="/contact">Reach Out to View Models and Find Your Perfect Home</Link>
                   </Button>
                 </div>
                 <p className="text-sm text-gray-500 mt-6">
