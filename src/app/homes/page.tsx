@@ -178,8 +178,8 @@ const HomesPage = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex justify-center">
-                  <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600 text-white">
-                    <Link href="/contact">Reach Out to View Models and Find Your Perfect Home</Link>
+                  <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600 text-white text-sm sm:text-base">
+                    <Link href="/contact">Reach Out to View Models</Link>
                   </Button>
                 </div>
                 <p className="text-sm text-gray-500 mt-6">

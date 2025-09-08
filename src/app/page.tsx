@@ -201,12 +201,12 @@ const HomePage = () => {
         >
           <div className="max-w-4xl ml-0 md:ml-8">
             
-            <h1 className="text-5xl md:text-6xl font-heading font-normal text-white mb-10">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-normal text-white mb-6 md:mb-10">
               Affordable Mobile Homes
               <span className="block text-white/90">& Land Solutions</span>
           </h1>
             
-            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed font-normal">
+            <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed font-normal">
               Buy, Install, and Secure Your Future Home
             </p>
 
