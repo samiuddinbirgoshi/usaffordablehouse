@@ -495,21 +495,20 @@ const HomePage = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-900 mb-2">Name *</label>
-                    <Input
-                      required
-                      value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      placeholder="Your full name"
-                        className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:bg-white"
-                    />
-                  </div>
+              <form onSubmit={handleSubmit} className="w-full space-y-6">
+                <div className="w-full">
+                  <label className="block text-sm font-medium text-gray-900 mb-2">Name *</label>
+                  <Input
+                    required
+                    value={formData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    placeholder="Your full name"
+                    className="w-full max-w-none bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:bg-white"
+                    style={{ width: '100%' }}
+                  />
                 </div>
 
-                <div>
+                <div className="w-full">
                     <label className="block text-sm font-medium text-gray-900 mb-2">Email *</label>
                   <Input
                     required
@@ -517,19 +516,21 @@ const HomePage = () => {
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     placeholder="your.email@example.com"
-                      className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:bg-white"
+                    className="w-full max-w-none bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:bg-white"
+                    style={{ width: '100%' }}
                   />
                 </div>
 
 
-                <div>
+                <div className="w-full">
                     <label className="block text-sm font-medium text-gray-900 mb-2">Message</label>
                   <Textarea
                     value={formData.message}
                     onChange={(e) => handleInputChange('message', e.target.value)}
                       placeholder="Tell us about your housing needs, budget, timeline..."
                     rows={4}
-                      className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:bg-white"
+                    className="w-full max-w-none bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:bg-white"
+                    style={{ width: '100%' }}
                   />
                 </div>
 
