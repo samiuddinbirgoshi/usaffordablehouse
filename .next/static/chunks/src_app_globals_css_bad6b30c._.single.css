@@ -845,6 +845,10 @@ h6 {
   max-width: 32rem;
 }
 
+.max-w-none {
+  max-width: none;
+}
+
 .flex-1 {
   flex: 1;
 }
@@ -2067,10 +2071,6 @@ h6 {
 }
 
 @media (min-width: 768px) {
-  .md\:col-span-2 {
-    grid-column: span 2 / span 2;
-  }
-
   .md\:mb-10 {
     margin-bottom: 2.5rem;
   }
