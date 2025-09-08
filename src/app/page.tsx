@@ -169,11 +169,11 @@ const HomePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen w-full bg-white">
       <Header currentPage="home" />
 
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden">
         {/* Background Images Carousel */}
         <div className="absolute inset-0">
           {heroImages.map((image, index) => (
@@ -199,14 +199,14 @@ const HomePage = () => {
           ref={heroRef}
           className={`relative z-10 w-full px-4 sm:px-6 lg:px-8 text-left fade-in ${heroVisible ? 'visible' : ''}`}
         >
-          <div className="max-w-4xl ml-0 md:ml-8">
+          <div className="w-full max-w-full sm:max-w-7xl mx-auto">
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-normal text-white mb-6 md:mb-10">
               Affordable Mobile Homes
               <span className="block text-white/90">& Land Solutions</span>
           </h1>
             
-            <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed font-normal">
+            <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 md:mb-12 leading-relaxed font-normal">
               Buy, Install, and Secure Your Future Home
             </p>
 
@@ -232,7 +232,7 @@ const HomePage = () => {
       {/* Our Mission */}
       <section ref={missionRef} className="py-24 bg-white">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 items-center max-w-full sm:max-w-7xl mx-auto">
             <div className={`fade-in ${missionVisible ? 'visible' : ''}`}>
               <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-6">
                 Our Mission
@@ -255,7 +255,7 @@ const HomePage = () => {
       {/* About Us */}
       <section ref={aboutRef} className="py-24 bg-gray-50">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 items-center max-w-full sm:max-w-7xl mx-auto">
             <div className={`order-2 lg:order-1 fade-in ${aboutVisible ? 'visible' : ''}`}>
               <div className="aspect-[4/3] bg-gray-200 overflow-hidden shadow-lg">
                 <img 
@@ -280,13 +280,13 @@ const HomePage = () => {
       {/* Features Section */}
       <section ref={featuresRef} className="py-20 bg-gray-50">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-full sm:max-w-6xl mx-auto">
             <div className={`text-center mb-12 fade-in ${featuresVisible ? 'visible' : ''}`}>
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
               Quality Homes for
               <span className="block text-primary">Every Family</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-full sm:max-w-2xl mx-auto">
               We provide quality mobile homes with professional installation and 
               comprehensive support to make homeownership accessible and affordable.
             </p>
@@ -320,12 +320,12 @@ const HomePage = () => {
 
       {/* Our Past Projects Section */}
       <section ref={galleryRef} className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full sm:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`text-center mb-16 fade-in ${galleryVisible ? 'visible' : ''}`}>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6">
               Our Past Projects
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-full sm:max-w-3xl mx-auto">
               See examples of our affordable housing solutions in action
             </p>
                  </div>
@@ -357,7 +357,7 @@ const HomePage = () => {
 
       {/* Services Section */}
       <section ref={servicesRef} className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full sm:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`text-center mb-12 fade-in ${servicesVisible ? 'visible' : ''}`}>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-8">
               Complete Housing
@@ -448,13 +448,13 @@ const HomePage = () => {
 
       {/* Contact Section */}
       <section ref={contactRef} className="py-20 bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full sm:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`text-center mb-12 fade-in ${contactVisible ? 'visible' : ''}`}>
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
               Ready to Get a Quote for Your
               <span className="block text-white/90">Dream Home Journey?</span>
             </h2>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-xl text-white/90 max-w-full sm:max-w-3xl mx-auto">
               Let's discuss your affordable housing needs and create a customized solution that fits your budget and timeline.
             </p>
           </div>
