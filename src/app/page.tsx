@@ -10,6 +10,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import emailjs from '@emailjs/browser'
+import { EMAILJS_CONFIG, EMAIL_TEMPLATE_PARAMS } from '@/config/emailjs'
 import { 
   Home, 
   Users, 
@@ -28,9 +30,16 @@ const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+  const [isLeadPopupOpen, setIsLeadPopupOpen] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    message: ''
+  })
+  const [leadFormData, setLeadFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
     message: ''
   })
 
@@ -52,6 +61,7 @@ const HomePage = () => {
   }
 
   const heroImages = [
+    "https://www.idesignarch.com/wp-content/uploads/Modern-Rustic-Dream-Home-British-Columbia-Canada_1-1024x768.jpg",
     "https://s7d9.scene7.com/is/image/championhomes/RH2542B-Exterior-1",
     "https://s7d9.scene7.com/is/image/championhomes/RH2542B-Exterior-6",
     "https://s7d9.scene7.com/is/image/championhomes/Prime%202856H32P01%20Exterior%203%20copy",
@@ -90,12 +100,12 @@ const HomePage = () => {
     },
     {
       title: "Landowners Full Service", 
-      description: "Already own land? We handle the entire mobile home installation process for you.",
+      description: "Already own land? We handle the entire manufactured home installation process for you.",
       icon: Users
     },
     {
       title: "Home Purchase Only",
-      description: "Choose from our selection of quality mobile homes and handle installation yourself.",
+      description: "Choose from our selection of quality manufactured homes and handle installation yourself.",
       icon: CheckCircle2
     },
     {
@@ -105,7 +115,7 @@ const HomePage = () => {
     },
     {
       title: "Financing Options",
-      description: "Flexible financing solutions for mobile homes, land purchases, and housing investments.",
+      description: "Flexible financing solutions for manufactured homes, land purchases, and housing investments.",
       icon: DollarSign
     }
   ]
@@ -114,38 +124,38 @@ const HomePage = () => {
     {
       id: 1,
       src: "https://s7d9.scene7.com/is/image/championhomes/RH2542B-Exterior-1",
-      alt: "Modern mobile home exterior",
-      title: "Modern Mobile Home Exterior"
+      alt: "Modern manufactured home exterior",
+      title: "Modern Manufactured Home Exterior"
     },
     {
       id: 2,
       src: "https://s7d9.scene7.com/is/image/championhomes/Prime%202856H32P01%20Exterior%203%20copy", 
-      alt: "Mobile home interior living room",
-      title: "Mobile Home Interior Living Room"
+      alt: "Manufactured home interior living room",
+      title: "Manufactured Home Interior Living Room"
     },
     {
       id: 3,
       src: "https://s7d9.scene7.com/is/image/championhomes/2856256-gsm-exterior-2-copy",
-      alt: "Mobile home kitchen",
-      title: "Mobile Home Kitchen"
+      alt: "Manufactured home kitchen",
+      title: "Manufactured Home Kitchen"
     },
     {
       id: 4,
       src: "https://s7d9.scene7.com/is/image/championhomes/Dublin%20kitchen%201",
-      alt: "Mobile home bedroom",
-      title: "Mobile Home Bedroom"
+      alt: "Manufactured home bedroom",
+      title: "Manufactured Home Bedroom"
     },
     {
       id: 5,
       src: "https://s7d9.scene7.com/is/image/championhomes/2856256-gsm-exterior-2-copy",
-      alt: "Mobile home bathroom",
-      title: "Mobile Home Bathroom"
+      alt: "Manufactured home bathroom",
+      title: "Manufactured Home Bathroom"
     },
     {
       id: 6,
       src: "https://s7d9.scene7.com/is/image/championhomes/Dublin%20kitchen%201",
-      alt: "Mobile home community",
-      title: "Mobile Home Community"
+      alt: "Manufactured home community",
+      title: "Manufactured Home Community"
     }
   ]
 
@@ -162,10 +172,82 @@ const HomePage = () => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleLeadInputChange = (field: string, value: string) => {
+    setLeadFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    // Handle form submission here
+    
+    try {
+      // Initialize EmailJS with your public key
+      emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY)
+      
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_email: EMAIL_TEMPLATE_PARAMS.to_email
+        }
+      )
+      
+      console.log('Email sent successfully:', result)
+      alert('Thank you for your inquiry! We will contact you within 24 hours.')
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      })
+      
+    } catch (error) {
+      console.error('Error sending email:', error)
+      alert('There was an error sending your message. Please try again or contact us directly at info@usahllc.com')
+    }
+  }
+
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    try {
+      // Initialize EmailJS with your public key
+      emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY)
+      
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          from_name: leadFormData.name,
+          from_email: leadFormData.email,
+          phone: leadFormData.phone,
+          message: leadFormData.message,
+          to_email: EMAIL_TEMPLATE_PARAMS.to_email,
+          form_type: "Let's Talk Lead Form"
+        }
+      )
+      
+      console.log('Lead email sent successfully:', result)
+      alert('Thank you for your interest! We will contact you within 24 hours.')
+      
+      // Reset form and close popup
+      setLeadFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      })
+      setIsLeadPopupOpen(false)
+      
+    } catch (error) {
+      console.error('Error sending lead email:', error)
+      alert('There was an error sending your message. Please try again or contact us directly at info@usahllc.com')
+    }
   }
 
   return (
@@ -202,7 +284,7 @@ const HomePage = () => {
           <div className="w-full max-w-full sm:max-w-7xl mx-auto">
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-normal text-white mb-6 md:mb-10 ml-0 md:ml-8">
-              Affordable Mobile Homes
+              Affordable Manufactured Homes
               <span className="block text-white/90">& Land Solutions</span>
           </h1>
             
@@ -238,13 +320,13 @@ const HomePage = () => {
                 Our Mission
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                At U.S. Affordable Housing, we are dedicated to making homeownership achievable for everyone in Central Florida's challenging market. We provide accessible housing solutions through affordable mobile homes, expert installation, and land acquisition support for both families and investors.
+                We provide accessible housing solutions through affordable manufactured homes beginning with land acquisition to buildout and installation support for both future homeowners and investors.
               </p>
             </div>
             <div className={`aspect-[4/3] bg-gray-200 overflow-hidden shadow-lg fade-in ${missionVisible ? 'visible' : ''}`}>
               <img 
                 src={heroImages[0]} 
-                alt="Mobile home community"
+                alt="Manufactured home community"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
                 </div>
@@ -255,7 +337,7 @@ const HomePage = () => {
       {/* About Us */}
       <section ref={aboutRef} className="py-24 bg-gray-50">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 items-center max-w-full sm:max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 items-center max-w-full sm:max-w-7xl mx-auto mb-16">
             <div className={`order-2 lg:order-1 fade-in ${aboutVisible ? 'visible' : ''}`}>
               <div className="aspect-[4/3] bg-gray-200 overflow-hidden shadow-lg">
                 <img 
@@ -270,8 +352,106 @@ const HomePage = () => {
                 Who We Are
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                With over 10 years of experience in real estate and affordable housing, U.S. Affordable Housing is your one-stop shop for affordable homes. We offer a wide range of homes to fit any budget, along with professional installation, land rental or acquisition assistance, and financing. Our team is committed to simplifying the process for end buyers seeking their dream home and investors looking for opportunities in Central Florida's housing market.
+                We offer a wide range of models to fit any budget along with a team to help secure land, permitting, installation and financing.
               </p>
+            </div>
+          </div>
+          
+          <div className="max-w-full sm:max-w-7xl mx-auto">
+            {/* Team Section - Executive Style */}
+            <div className={`fade-in ${aboutVisible ? 'visible' : ''}`}>
+              <div className="text-center mb-16">
+                <h3 className="text-4xl font-heading font-bold text-gray-900 mb-8">Our Team</h3>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                  Meet the experienced professionals driving our mission to provide affordable housing solutions
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                {/* CFO */}
+                <div className="group">
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl mb-6 transform group-hover:scale-105 transition-all duration-500">
+                    <div className="aspect-[4/5] bg-gradient-to-br from-gray-100 to-gray-200">
+                      <img 
+                        src="/cfo.jpeg" 
+                        alt="CFO - Chief Financial Officer"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-2">Chief Financial Officer</h4>
+                    <p className="text-primary font-semibold text-lg mb-3">CFO</p>
+                    <p className="text-gray-600 leading-relaxed">
+                      Leading financial strategy and ensuring sustainable growth in affordable housing development
+                    </p>
+                  </div>
+                </div>
+
+                {/* Julie H */}
+                <div className="group">
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl mb-6 transform group-hover:scale-105 transition-all duration-500">
+                    <div className="aspect-[4/5] bg-gradient-to-br from-gray-100 to-gray-200">
+                      <img 
+                        src="/teamlead.jpeg" 
+                        alt="Julie H. - Team Lead"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-2">Julie H.</h4>
+                    <p className="text-primary font-semibold text-lg mb-3">Team Lead</p>
+                    <p className="text-gray-600 leading-relaxed">
+                      Coordinating operations and ensuring exceptional service delivery across all housing projects
+                    </p>
+                  </div>
+                </div>
+
+                {/* Jordan J */}
+                <div className="group">
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl mb-6 transform group-hover:scale-105 transition-all duration-500">
+                    <div className="aspect-[4/5] bg-gradient-to-br from-gray-100 to-gray-200">
+                      <img 
+                        src="/produtmanager.jpeg" 
+                        alt="Jordan J. - Product Manager & Operations"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-2">Jordan J.</h4>
+                    <p className="text-primary font-semibold text-lg mb-3">Product Manager & Operations</p>
+                    <p className="text-gray-600 leading-relaxed">
+                      Overseeing product development and operational excellence in manufactured home solutions
+                    </p>
+                  </div>
+                </div>
+
+                {/* Karim Bhimani */}
+                <div className="group">
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl mb-6 transform group-hover:scale-105 transition-all duration-500">
+                    <div className="aspect-[4/5] bg-gradient-to-br from-gray-100 to-gray-200">
+                      <img 
+                        src="/acquisitionn.jpeg" 
+                        alt="Karim Bhimani - Acquisitions"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-2">Karim Bhimani</h4>
+                    <p className="text-primary font-semibold text-lg mb-3">Acquisitions</p>
+                    <p className="text-gray-600 leading-relaxed">
+                      Identifying and securing strategic land opportunities for affordable housing development
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -287,7 +467,7 @@ const HomePage = () => {
               <span className="block text-primary">Every Family</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-full sm:max-w-2xl mx-auto">
-              We provide quality mobile homes with professional installation and 
+              We provide quality manufactured homes with professional installation and 
               comprehensive support to make homeownership accessible and affordable.
             </p>
           </div>
@@ -462,28 +642,39 @@ const HomePage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div className={`space-y-8 fade-in ${contactVisible ? 'visible' : ''}`}>
 
-              <div className="flex items-start space-x-4">
+              <div className="flex items-start space-x-4 ml-4">
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
                   <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Email Us</h3>
                   <p className="text-white/80 mb-2">Get detailed information via email</p>
-                  <a href="mailto:info@usaffordablehousing.com" className="text-white font-semibold text-lg hover:text-secondary transition-colors">
-                    info@usaffordablehousing.com
+                  <a href="mailto:info@usahllc.com" className="text-white font-semibold text-lg hover:text-secondary transition-colors">
+                    info@usahllc.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
+              <div 
+                className="flex items-start space-x-4 cursor-pointer hover:bg-white/10 p-4 rounded-lg transition-colors"
+                onClick={() => setIsLeadPopupOpen(true)}
+              >
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
                   <Calendar className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">Schedule a Visit</h3>
-                  <p className="text-white/80 mb-2">Tour our model homes and communities</p>
-                </div>
-              </div>
+                  <h3 className="text-xl font-semibold mb-2">Let's Talk</h3>
+                  <p className="text-white/80 mb-2">Get personalized assistance with your housing needs</p>
+                  <div className="flex justify-start">
+                    <Button 
+                      variant="outline" 
+                      className="mt-2 bg-white/20 border-white/40 text-white hover:bg-white/30 mr-auto"
+                    >
+                      Contact Us
+            </Button>
+                  </div>
+          </div>
+        </div>
 
             </div>
 
@@ -497,15 +688,15 @@ const HomePage = () => {
             <CardContent>
               <form onSubmit={handleSubmit} className="w-full space-y-6">
                 <div className="w-full">
-                  <label className="block text-sm font-medium text-gray-900 mb-2">Name *</label>
-                  <Input
-                    required
-                    value={formData.name}
-                    onChange={(e) => handleInputChange('name', e.target.value)}
-                    placeholder="Your full name"
+                      <label className="block text-sm font-medium text-gray-900 mb-2">Name *</label>
+                    <Input
+                      required
+                      value={formData.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      placeholder="Your full name"
                     className="w-full max-w-none bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:bg-white"
                     style={{ width: '100%' }}
-                  />
+                    />
                 </div>
 
                 <div className="w-full">
@@ -545,6 +736,98 @@ const HomePage = () => {
       </section>
 
       <Footer />
+
+      {/* Lead Capture Popup */}
+      {isLeadPopupOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-bold text-gray-900">Let's Talk!</h2>
+                <button 
+                  onClick={() => setIsLeadPopupOpen(false)}
+                  className="text-gray-400 hover:text-gray-600 text-2xl"
+                >
+                  ×
+                </button>
+              </div>
+              
+              <p className="text-gray-600 mb-6">
+                Tell us about your housing needs and we'll get back to you within 24 hours with personalized options.
+              </p>
+
+              <form onSubmit={handleLeadSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Name *
+                  </label>
+                  <Input
+                    required
+                    value={leadFormData.name}
+                    onChange={(e) => handleLeadInputChange('name', e.target.value)}
+                    placeholder="Your full name"
+                    className="w-full"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email *
+                  </label>
+                  <Input
+                    required
+                    type="email"
+                    value={leadFormData.email}
+                    onChange={(e) => handleLeadInputChange('email', e.target.value)}
+                    placeholder="your.email@example.com"
+                    className="w-full"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone Number
+                  </label>
+                  <Input
+                    type="tel"
+                    value={leadFormData.phone}
+                    onChange={(e) => handleLeadInputChange('phone', e.target.value)}
+                    placeholder="(555) 123-4567"
+                    className="w-full"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Tell us about your needs
+                  </label>
+                  <Textarea
+                    value={leadFormData.message}
+                    onChange={(e) => handleLeadInputChange('message', e.target.value)}
+                    placeholder="Budget range, timeline, family size, preferred location, etc."
+                    rows={4}
+                    className="w-full"
+                  />
+                </div>
+
+                <div className="flex gap-3">
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => setIsLeadPopupOpen(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                  <Button type="submit" className="flex-1">
+                    Send Message
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -85,7 +85,7 @@ const HomesPage = () => {
       <section ref={headerRef} className="bg-gradient-to-r from-primary to-primary/80 py-24">
         <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in ${headerVisible ? 'visible' : ''}`}>
           <h1 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
-            Our Affordable Mobile Homes
+            Our Affordable Manufactured Homes
           </h1>
           <p className="text-lg text-white/90 max-w-3xl mx-auto">
             Explore a range of options. Contact us for details and pricing.

@@ -15,8 +15,8 @@ const openSans = Open_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'U.S. Affordable Housing | Affordable Mobile Homes & Land Solutions',
-  description: 'Buy, Install, and Secure Your Future Home. We provide accessible housing solutions through affordable mobile homes, expert installation, and land acquisition support.',
+  title: 'U.S. Affordable Housing | Affordable Manufactured Homes & Land Solutions',
+  description: 'Buy, Install, and Secure Your Future Home. We provide accessible housing solutions through affordable manufactured homes, expert installation, and land acquisition support.',
 }
 
 export default function RootLayout({

@@ -11,6 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { ArrowLeft, Mail, MapPin, Clock } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+import { EMAILJS_CONFIG, EMAIL_TEMPLATE_PARAMS } from '@/config/emailjs'
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -31,17 +33,41 @@ const ContactPage = () => {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    // Here you would typically send the data to your backend
-    alert('Thank you for your inquiry! We will contact you within 24 hours.')
-    setFormData({
-      name: '',
-      email: '',
-      interest: '',
-      message: ''
-    })
+    
+    try {
+      // Initialize EmailJS with your public key
+      emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY)
+      
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          interest: formData.interest,
+          message: formData.message,
+          to_email: EMAIL_TEMPLATE_PARAMS.to_email
+        }
+      )
+      
+      console.log('Email sent successfully:', result)
+      alert('Thank you for your inquiry! We will contact you within 24 hours.')
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        interest: '',
+        message: ''
+      })
+      
+    } catch (error) {
+      console.error('Error sending email:', error)
+      alert('There was an error sending your message. Please try again or contact us directly at info@usahllc.com')
+    }
   }
 
   return (
@@ -155,7 +181,7 @@ const ContactPage = () => {
                   <div className="flex items-start gap-3">
                     <Mail className="w-5 h-5 text-primary mt-1" />
                     <div>
-                      <div className="font-semibold text-gray-900">info@usaffordablehousing.com</div>
+                      <div className="font-semibold text-gray-900">info@usahllc.com</div>
                       <div className="text-sm text-gray-600">Email us anytime</div>
                     </div>
                   </div>

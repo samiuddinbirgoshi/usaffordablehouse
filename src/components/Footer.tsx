@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">U.S. Affordable Housing</h3>
             <p className="text-gray-400 mb-4">
-              Your trusted partner for affordable mobile homes and land solutions in Central Florida.
+              Your trusted partner for affordable manufactured homes and land solutions in Central Florida.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -37,7 +37,7 @@ const Footer = () => {
             <div className="space-y-2 text-gray-400">
               <p>6220 South Orange Blossom Trail</p>
               <p>Orlando, FL, USA</p>
-              <p>Email: info@usaffordablehousing.com</p>
+              <p>Email: info@usahllc.com</p>
             </div>
           </div>
         </div>
